@@ -43,6 +43,12 @@ Hosting a Java Spring Boot Application on Amazon EC2
         command : mvn -v
         The output should display Maven's version and other details.
 
+    VS Code Set-up
+      Open this project in VS code
+      After opening the project, select on use maven.
+
+      select the application.java file and debug it.
+
 
     Build the application
 
@@ -54,7 +60,7 @@ Hosting a Java Spring Boot Application on Amazon EC2
       The JAR file will be located in the target directory, e.g., target/flightservice-0.0.1-SNAPSHOT.jar.
 
 
-2. set up amazon EC2 :
+3. set up amazon EC2 :
    Launch an EC2 Instance
    Go to the Amazon EC2 Management Console and launch an EC2 instance with your desired configuration.
 
@@ -79,7 +85,7 @@ Hosting a Java Spring Boot Application on Amazon EC2
      (Note : the presigned URL has to be in " " )
 
 
-3. Configure the Application to Run Persistently
+4. Configure the Application to Run Persistently
      Create a System Service
         Create a new service file for your Spring Boot application. Open a file named flightservice.service in the /etc/systemd/system/ directory:
         command : sudo nano /etc/systemd/system/flightservice.service
@@ -118,7 +124,7 @@ Hosting a Java Spring Boot Application on Amazon EC2
        command : sudo systemctl status flightservice
 
 
-4. Configure Security Group
+5. Configure Security Group
    
     Allow TCP Traffic on Port 8080
        Go to the Amazon EC2 Management Console:
