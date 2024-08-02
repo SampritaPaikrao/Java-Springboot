@@ -4,25 +4,31 @@ Hosting a Java Spring Boot Application on Amazon EC2
 
    Clone the repository
    - clone springboot application repository from github : https://github.com/spring-guides/gs-spring-boot
+   - 
      command : git clone <repository-url>
 
    Install Maven :
    - Steps to install maven and set-up maven
      1. Download Maven
         Download the Maven binary archive from the Apache Maven website Choose the .zip or .tar.gz file, depending on your preference.
+
         command : wget https://archive.apache.org/dist/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz
         
      3. Extract the archive
         Extract the downloaded archive:
+
         command : tar xzvf apache-maven-3.9.8-bin.tar.gz
+        
         This will create a directory named apache-maven-3.9.8
         
      5. move maven to /opt (optional)
         for system-wide availability, you can move maven to /opt
+        
         command : sudo mv apache-maven-3.9.8 /opt/
         
      7. Set up environment variables
         Add Maven to your PATH environment variable. Open or create the ~/.bashrc file
+        
         command : nano ~/.bashrc
 
         Add the following lines to the end of the file:
@@ -34,13 +40,16 @@ Hosting a Java Spring Boot Application on Amazon EC2
             M2_HOME points to the Maven installation directory.
             PATH includes the Maven bin directory to make the mvn command available globally.
 
-     8. Apply the changes :
+     9. Apply the changes :
         Load the updated .bashrc file:
+        
         command : source ~/.bashrc
 
-     9. Verify Maven Installation
+     11. Verify Maven Installation
         Confirm that Maven is installed and available:
+
         command : mvn -v
+     
         The output should display Maven's version and other details.
 
     VS Code Set-up
@@ -68,6 +77,7 @@ Hosting a Java Spring Boot Application on Amazon EC2
    Connect to your EC2 instance via SSH.
 
    Install Java 17 (Amazon Corretto):
+   
    command : sudo yum install java-17-amazon-corretto-devel
 
    Upload the JAR File to S3
@@ -81,13 +91,16 @@ Hosting a Java Spring Boot Application on Amazon EC2
 
    Download the JAR File to EC2
      Use the presigned URL to download the JAR file to your EC2 instance:
+   
      command : wget -O flightservice-0.0.1-SNAPSHOT.jar <your-presigned-url>
+     
      (Note : the presigned URL has to be in " " )
 
 
-4. Configure the Application to Run Persistently
+5. Configure the Application to Run Persistently
      Create a System Service
         Create a new service file for your Spring Boot application. Open a file named flightservice.service in the /etc/systemd/system/ directory:
+   
         command : sudo nano /etc/systemd/system/flightservice.service
 
      Add the following content to the file:
@@ -111,20 +124,24 @@ Hosting a Java Spring Boot Application on Amazon EC2
 
    Reload and Start the Service
        Reload the systemd manager configuration:
+   
        command : sudo systemctl daemon-reload
 
        Start the service:
+   
        command : sudo systemctl start flightservice
 
        Enable the service to start on boot:
+   
        command : sudo systemctl enable flightservice
 
        Verify the Service
        Check the status of your service to ensure it's running:
+   
        command : sudo systemctl status flightservice
 
 
-5. Configure Security Group
+7. Configure Security Group
    
     Allow TCP Traffic on Port 8080
        Go to the Amazon EC2 Management Console:
@@ -141,7 +158,7 @@ Hosting a Java Spring Boot Application on Amazon EC2
            Save the changes.
 
    
-6. Access Your Application
+8. Access Your Application
        Open a web browser and navigate to http://<ec2-public-ip>:8080 to access your Spring Boot application.
 
  
